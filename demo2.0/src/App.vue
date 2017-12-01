@@ -45,16 +45,24 @@
       <button @click="isCreate=!isCreate">isCreate</button>
       <p v-show="isShow">v-show</p>
       <button @click="isShow=!isShow">isShow</button>
+
+      <componentA @my-event="onCompAEvent"></componentA>
+      <input type="text" v-model.number="inputData">{{ typeof inputData}}
+      <pre>v-model有三种修饰器.lazy延迟同步  .number失去焦点时，所有非数字都消失  .trim能用空格等特殊字符</pre>
+
+      <computeds></computeds>  
     </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import componentAA from './components/a.vue'
+import computed from './components/v-computed.vue'
 export default {
   name: 'app',
   components:{
-    componentA:componentAA
+    componentA:componentAA,
+    computeds:computed
   },
   data () {
     return {
@@ -82,7 +90,8 @@ export default {
       ],
       links:'www.baidu.com',
       isShow:true,
-      isCreate:false
+      isCreate:false,
+      inputData:[]
     }
   },
   methods:{
@@ -103,6 +112,9 @@ export default {
         name:'gg',
         price:5200
       })
+    },
+    onCompAEvent:function(params){
+      alert('AAAAA'+params)
     }
   }
 }
