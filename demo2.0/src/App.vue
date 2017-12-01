@@ -51,6 +51,23 @@
       <pre>v-model有三种修饰器.lazy延迟同步  .number失去焦点时，所有非数字都消失  .trim能用空格等特殊字符</pre>
 
       <computeds></computeds>  
+
+      <code>watch监听的key为监听的那个data属性</code>
+      <pre>花括号中要用驼峰命名，属性中或者组件命名和自定义事件需要用"-"进行连接！！！</pre>
+
+      <input type="text" v-model.number="giveChild">
+      <get-pa-data :PaData='giveChild'>
+        <!-- <p>我是slot插槽</p> -->
+        <!-- <p slot="header"> I am header</p> -->
+        <p slot="footer">I am fotter</p>
+      </get-pa-data>
+
+      <pre>动画使用transition name="xx" mode="out-in" 则先出后进，默认in-out先进后出(不推荐) 如果多个一样的标签进行动画过度(如两个P标签)，则需要使用key进行区别各个元素</pre>
+
+      <div>自定义指令使用directives</div>
+      <p v-color="'red'">hello directive指令(v-xxx)////在组件中定义的指令只能在本组件使用，子组件都无法使用，所以在多处使用时应该定义为全局指令(放在main.js中！！)</p>
+      <div>自定义指令使用情景: <i>比如插入input之后里马使input获取焦点，则可以在insert时调用focus</i>  </div>  
+      
     </div>
 </template>
 
@@ -58,11 +75,13 @@
 import Vue from 'vue'
 import componentAA from './components/a.vue'
 import computed from './components/v-computed.vue'
+import getPaData from './components/getPaData.vue'
 export default {
   name: 'app',
   components:{
     componentA:componentAA,
-    computeds:computed
+    computeds:computed,
+    getPaData:getPaData
   },
   data () {
     return {
@@ -91,7 +110,8 @@ export default {
       links:'www.baidu.com',
       isShow:true,
       isCreate:false,
-      inputData:[]
+      inputData:1,
+      giveChild:''
     }
   },
   methods:{
@@ -116,6 +136,30 @@ export default {
     onCompAEvent:function(params){
       alert('AAAAA'+params)
     }
+  },
+  watch: {
+    inputData(newVal,oldVal){
+      console.log(newVal,oldVal)
+    }
+  },
+  directives:{
+    color: function(el,binding,...a){
+      el.style.color=binding.value
+      console.log(binding)
+      // console.log(a)//   ES6:  a能拿到除了前面已定义的参数之外的所有参数！！！
+
+    },
+    // color:{
+    //   bind:function(){
+            // 指令绑定到元素时调用
+    //   },
+    //   insert:function(){
+            // 被绑定元素插入到父节点时调用，府街店存在即可调用，不用存在于document中
+    //   },
+    //   update:function(){
+            // 被绑定元素所在的模板更新时调用，
+    //   }
+    // }
   }
 }
 </script>
