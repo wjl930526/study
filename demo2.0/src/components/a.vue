@@ -1,26 +1,26 @@
 <template>
-  <div>
-      {{hello}}
-      <button @click="emitMyEvent">emit</button>
-  </div>
+    <div>
+        {{hello}}
+        <button @click="emitMyEvent">emit</button>
+    </div>
 </template>
 <script>
-    export default{
-        data () {
+    export default {
+        data() {
             return {
-                hello:'i am component a'
+                hello: 'i am component a'
             }
         },
         methods: {
-            emitMyEvent(){
-                this.$emit('my-event',this.hello)
+            emitMyEvent() {
+                this.$emit('my-event', this.hello)
             },
         }
     }
 </script>
 
 <style scoped>
-    div{
+    div {
         background-color: blueviolet;
     }
 </style>
