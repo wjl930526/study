@@ -25,6 +25,7 @@
       </div>
     </div>
     <div class="index-right">
+      <slide-show :slides="slides" :inv="invTime"></slide-show>
       <div class="index-board-list">
         <div class="index-board-item" v-for="(item,index) in boardList" :key="index" :class="[{'line-last':index % 2!=0},'index-board-'+item.id]">
           <div class="index-board-item-inner">
@@ -41,7 +42,11 @@
   </div>
 </template>
 <script>
+import slideShow from '../components/slideShow'
 export default {
+  components: {
+    slideShow
+  },
   data() {
     return {
       boardList: [
@@ -138,7 +143,31 @@ export default {
           name:'新闻4',
           url:'www.baidu.com'
         },
+      ],
+      invTime:2000,
+      slides: [
+        {
+          src: require('../assets/slideShow/pic1.jpg'),
+          title: 'xxx1',
+          href: 'detail/snalysis'
+        },
+        {
+          src: require('../assets/slideShow/pic2.jpg'),
+          title: 'xxx2',
+          href: 'detail/count'
+        },
+        {
+          src: require('../assets/slideShow/pic3.jpg'),
+          title: 'xxx3',
+          href: 'www.baidu.com'
+        },
+        {
+          src: require('../assets/slideShow/pic4.jpg'),
+          title: 'xxx4',
+          href: 'detail/forecast'
+        }
       ]
+
     };
   }
 };
