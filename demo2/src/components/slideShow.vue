@@ -46,8 +46,9 @@
           setTimeout(()=>{
               this.isShow=true
               this.nowIndex=index
+              this.$emit('onchange',index)
           },10)
-        this.nowIndex = index
+        // this.nowIndex = index
       },
       runInvTime() {
         this.invTimeId = setInterval(() => {

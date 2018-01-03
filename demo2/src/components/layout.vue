@@ -5,11 +5,11 @@
         <img src="../assets/logo.png" alt="">
         <div class="head-nav">
           <ul class="nav-list">
-            <li>登录</li>
+            <li @click="logClick">登录</li>
             <li class="nav-pile">|</li>
-            <li>注册</li>
+            <li @click="regClick">注册</li>
             <li class="nav-pile">|</li>
-            <li>关于</li>
+            <li @click="aboutClick">关于</li>
           </ul>
         </div>
       </div>        
@@ -22,15 +22,52 @@
     <div class="app-foot">
       <p>© 2017 wangjinglei  MIT</p>
     </div>
+    <my-dialog :isShow="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+      <p>about Info</p>
+    </my-dialog>
+    <my-dialog :isShow="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+      <p>log</p>
+      <log-from></log-from>
+    </my-dialog>
+    <my-dialog :isShow="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+      <p>reg</p>
+      <reg-form></reg-form>
+    </my-dialog>
   </div>
 </template>
 
 <script>
+import Dialog from './dialog'
+import LogForm from './logForm'
+import RegForm from './regForm'
 export default {
+  components: {
+    myDialog:Dialog,
+    LogForm,
+    RegForm
+  },
   data () {
     return {
       msg:'i am apple',
-      price:5
+      price:5,
+      isShowAboutDialog:false,
+      isShowLogDialog:false,
+      isShowRegDialog:false,
+      
+    }
+  },
+  methods: {
+    aboutClick(){
+      this.isShowAboutDialog=true
+    },
+    logClick(){
+      this.isShowLogDialog=true
+    },
+    regClick(){
+      this.isShowRegDialog=true
+    },
+    closeDialog(params){
+      this[params]=false
     }
   }
 }
