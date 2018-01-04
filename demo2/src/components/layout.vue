@@ -27,7 +27,7 @@
     </my-dialog>
     <my-dialog :isShow="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
       <p>log</p>
-      <log-from></log-from>
+      <log-form></log-form>
     </my-dialog>
     <my-dialog :isShow="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
       <p>reg</p>
