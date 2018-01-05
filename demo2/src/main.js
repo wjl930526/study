@@ -1,6 +1,8 @@
 import Vue from 'vue'
-import Layout from './components/layout.vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
+
+import Layout from './components/layout.vue'
 import IndexPage from './pages/index'
 import DetailPage from './pages/detail.vue'
 import DetailAnaPage from './pages/detail/analysis.vue'
@@ -8,6 +10,8 @@ import DetailCouPage from './pages/detail/count.vue'
 import DetailForPage from './pages/detail/forecast.vue'
 import DetailPubPage from './pages/detail/publish.vue'
 Vue.use(VueRouter)
+
+Vue.prototype.$http = axios
 
 let router = new VueRouter({
   mode: 'history',

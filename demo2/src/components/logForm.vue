@@ -38,6 +38,21 @@ export default {
           if(this.userErrors.status && this.passwordErrors.status){
             console.log(this.usernameModel+'----'+this.passwordModel)
             this.errorText=''
+            // this.$http.get('/api/seller')
+            // .then((data)=>{
+            //     alert('登录')
+            // })
+            // .catch((err)=>{
+            //     console.log(err)
+            // })
+
+            this.$http.post('http://localhost:8001/api/foods')
+            .then((data)=>{
+                console.log(data)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
           }else{
             this.errorText='部分验证未通过'
           }
