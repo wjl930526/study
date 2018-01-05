@@ -17,9 +17,9 @@
           产品类型：
         </div>
         <div class="sales-board-line-right">
-            <v-selection :selections="productType">
+          <v-selection :selections="productType">
 
-            </v-selection>
+          </v-selection>
         </div>
       </div>
       <div class="sales-board-line">
@@ -83,33 +83,32 @@
 </template>
 
 <script>
-import VSelection from '../../components/selection'
+  import VSelection from '../../components/selection'
   export default {
-      data () {
-          return {
-             productType:[
-                 {
-                     label:'入门班',
-                     value:0
-                 },
-                 {
-                     label:'初级班',
-                     value:1
-                 },
-                 {
-                     label:'中级班',
-                     value:2
-                 },
-                 {
-                     label:'高级班',
-                     value:3
-                 }
-             ]     
+    data() {
+      return {
+        productType: [{
+            label: '入门班',
+            value: 0
+          },
+          {
+            label: '初级班',
+            value: 1
+          },
+          {
+            label: '中级班',
+            value: 2
+          },
+          {
+            label: '高级班',
+            value: 3
           }
-      },
-      components: {
-          VSelection
+        ]
       }
+    },
+    components: {
+      VSelection
+    }
   }
 
 </script>
