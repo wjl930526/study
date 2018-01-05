@@ -51,10 +51,11 @@
         }
       }
     },
-    mounted () {
-        console.log(this.$route,this.$router)
+    mounted() {
+      console.log(this.$route, this.$router)
     }
   }
+
 </script>
 <style>
   .detail-wrap {
