@@ -4,9 +4,9 @@
       <div class="product-board">
         <img :src="imgMap[$route.path]" alt="">
         <ul>
-          <li v-for="(item,index) in products" :key="index">
+          <router-link v-for="(item,index) in products" :key="index" :to="{path:item.path}" tag="li" active-class="active">
             {{item.name}}
-          </li>
+          </router-link>
         </ul>
       </div>
     </div>
