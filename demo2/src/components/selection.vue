@@ -1,12 +1,12 @@
 <template>
   <div class="selection-component">
-    <div class="selection-show">
-      <span>xxxxx</span>
+    <div class="selection-show" @click="toggleDrop">
+      <span>{{selections[nowIndex].label}}</span>
       <div class="arrow"></div>
     </div>
-    <div class="selection-list">
+    <div class="selection-list" v-if="isDrop">
       <ul>
-        <li v-for="(item,index) in selections" :key="index">{{item.label}}</li>
+        <li v-for="(item,index) in selections" :key="index" @click="choseSelection(index)">{{item.label}}</li>
       </ul>
     </div>
   </div>
@@ -20,6 +20,22 @@
           label: 'test',
           value: 0
         }]
+      }
+    },
+    data () {
+      return {
+        nowIndex:0,
+        isDrop:false
+      }
+    },
+    methods: {
+      toggleDrop(){
+        this.isDrop=!this.isDrop
+      },
+      choseSelection(index){
+        this.nowIndex=index
+        this.isDrop=false
+        this.$emit('on-change',this.nowIndex)
       }
     }
   }

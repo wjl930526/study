@@ -49,7 +49,7 @@
       <div class="sales-board-line">
         <div class="sales-board-line-left">&nbsp;</div>
         <div class="sales-board-line-right">
-          <div class="button" @click="showPayDialog">
+          <div class="button">
             立即购买
           </div>
         </div>
@@ -78,7 +78,7 @@
       </ul>
     </div>
 
-    <check-order :is-show-check-dialog="isShowCheckOrder" :order-id="orderId" @on-close-check-dialog="hideCheckOrder"></check-order>
+    <!-- <check-order :is-show-check-dialog="isShowCheckOrder" :order-id="orderId" @on-close-check-dialog="hideCheckOrder"></check-order> -->
   </div>
 </template>
 
