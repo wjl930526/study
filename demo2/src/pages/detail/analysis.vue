@@ -10,6 +10,7 @@
           购买数量：
         </div>
         <div class="sales-board-line-right">
+          <v-counter :min="minNum" :max="maxNum"></v-counter>
         </div>
       </div>
       <div class="sales-board-line">
@@ -84,6 +85,7 @@
 
 <script>
   import VSelection from '../../components/selection'
+  import VCounter from '../../components/counter'
   export default {
     data() {
       return {
@@ -103,11 +105,14 @@
             label: '高级班',
             value: 3
           }
-        ]
+        ],
+        maxNum:10,
+        minNum:2
       }
     },
     components: {
-      VSelection
+      VSelection,
+      VCounter
     }
   }
 
