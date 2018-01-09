@@ -11,7 +11,7 @@
   export default {
     data() {
       return {
-          nowIndexs:[]
+        nowIndexs: []
       }
     },
     props: {
@@ -25,22 +25,21 @@
     },
     methods: {
       toggleSelection(index) {
-          if(this.nowIndexs.indexOf(index)===-1){
-              this.nowIndexs.push(index)
-          }else{
-              this.nowIndexs.splice(this.nowIndexs.indexOf(index),1)
-          }
-          debugger
-          this.$emit('on-change',this.getArray())
+        if (this.nowIndexs.indexOf(index) === -1) {
+          this.nowIndexs.push(index)
+        } else {
+          this.nowIndexs.splice(this.nowIndexs.indexOf(index), 1)
+        }
+        this.$emit('on-change', this.getArray())
       },
-      checkActive(index){
-          return this.nowIndexs.indexOf(index) != -1
+      checkActive(index) {
+        return this.nowIndexs.indexOf(index) != -1
       },
-      getArray(){
-        let arr=[]
-        this.nowIndexs.map((val,index,array)=>{
+      getArray() {
+        let arr = []
+        this.nowIndexs.map((val, index, array) => {
           arr.push(this.selections[val])
-        },this)
+        }, this)
         return arr
       }
     },
