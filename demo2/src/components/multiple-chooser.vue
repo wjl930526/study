@@ -30,7 +30,8 @@
           }else{
               this.nowIndexs.splice(this.nowIndexs.indexOf(index),1)
           }
-        //   this.$emit('on-change',this.nowIndex)
+          debugger
+          this.$emit('on-change',this.nowIndex)
       },
       checkActive(index){
           return this.nowIndexs.indexOf(index) != -1

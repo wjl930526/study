@@ -52,8 +52,8 @@ export default {
   },
   watch: {
       number(){
-        //   this.$emit()
-        console.log(this.number)
+          this.$emit('on-change',this.number)
+        // console.log(this.number)
       }
   }
 }
