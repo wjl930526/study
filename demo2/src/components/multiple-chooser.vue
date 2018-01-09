@@ -31,10 +31,17 @@
               this.nowIndexs.splice(this.nowIndexs.indexOf(index),1)
           }
           debugger
-          this.$emit('on-change',this.nowIndex)
+          this.$emit('on-change',this.getArray())
       },
       checkActive(index){
           return this.nowIndexs.indexOf(index) != -1
+      },
+      getArray(){
+        let arr=[]
+        this.nowIndexs.map((val,index,array)=>{
+          arr.push(this.selections[val])
+        },this)
+        return arr
       }
     },
 
