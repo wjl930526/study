@@ -44,7 +44,7 @@
           总价：
         </div>
         <div class="sales-board-line-right">
-          200 元
+          {{price}} 元
         </div>
       </div>
       <div class="sales-board-line">
@@ -139,7 +139,8 @@
         buyNum:0,
         buyType:{},
         versions:[],
-        period:{}
+        period:{},
+        price:0
       }
     },
     components: {
@@ -170,11 +171,18 @@
         this.$http.post('/api/getPrice',reqParams)
         .then((res)=>{
           console.log(res)
+          this.price=res.data.data
         })
         .catch((err)=>{
           console.log(err)
         })
       }
+    },
+    mounted () {
+      this.buyNum=this.minNum,
+      this.buyType=this.productType[0],
+      this.period=this.periodList[0],
+      this.versions=this.versionList[0]
     }
   }
 
