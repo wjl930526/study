@@ -152,6 +152,28 @@
       onParamChange(attr,val){
         this[attr]=val
         console.log(attr,this[attr])
+        this.getPrice()
+
+      },
+      getPrice(){
+        let versionArr=[]
+        this.versions.map((val,i,arr)=>{
+          versionArr.push(val.value)
+        })
+        let reqParams={
+          buyNum:this.buyNum,
+          buyType:this.buyType.value,
+          versions:versionArr.toString(),
+          period:this.period.value
+        }
+        console.log(reqParams)
+        this.$http.post('/api/getPrice',reqParams)
+        .then((res)=>{
+          console.log(res)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
       }
     }
   }

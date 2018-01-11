@@ -3,6 +3,7 @@ const webpack = require('webpack')
 
 const portfinder = require('portfinder')
 const express = require('express')
+const bodyParser=require('body-parser')
 const app = express()
 const appData = require('./src/data.json')//加载本地数据文件
 const seller = appData.seller//获取对应的本地数据
@@ -11,6 +12,8 @@ const ratings = appData.ratings
 const foods = appData.foods
 
 const apiRoutes = express.Router()
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
 app.use('/api', apiRoutes)
 
 module.exports = {
@@ -113,6 +116,13 @@ module.exports = {
         })
       }),
       app.post('/api/foods', (req,res)=> { // 注意这里改为post就可以了
+        res.json({
+          errno: 0,
+          data: foods
+        });
+      }),
+      app.post('/api/getPrice', (req,res)=> { // 注意这里改为post就可以了
+        console.log(req.body)
         res.json({
           errno: 0,
           data: foods
