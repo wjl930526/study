@@ -12,9 +12,9 @@ const ratings = appData.ratings
 const foods = appData.foods
 
 const apiRoutes = express.Router()
-app.use('/api', apiRoutes)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
+app.use('/api', apiRoutes)
 
 module.exports = {
   entry: './src/main.js',
