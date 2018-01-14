@@ -38,7 +38,12 @@ export default {
           if(this.userErrors.status && this.passwordErrors.status){
             console.log(this.usernameModel+'----'+this.passwordModel)
             this.errorText=''
-            // this.$http.get('/api/seller')
+            // this.$http.get('/api/seller',{
+            //     params:{
+            //         a:'a',
+            //         b:'b'
+            //     }
+            // })
             // .then((data)=>{
             //     alert('登录')
             // })
@@ -46,9 +51,21 @@ export default {
             //     console.log(err)
             // })
 
-            this.$http.post('http://localhost:8001/api/foods')
-            .then((data)=>{
-                console.log(data)
+            // this.$http.post('http://localhost:8001/api/foods')
+            // .then((data)=>{
+            //     console.log(data)
+            // })
+            // .catch((err)=>{
+            //     console.log(err)
+            // })
+            this.$http.get('/api/login',{
+                params:{
+                    username:this.usernameModel,
+                    password:this.passwordModel
+                }
+            })
+            .then((res)=>{
+                alert(JSON.stringify(res.data.data))
             })
             .catch((err)=>{
                 console.log(err)

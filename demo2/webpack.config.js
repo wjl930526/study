@@ -12,9 +12,9 @@ const ratings = appData.ratings
 const foods = appData.foods
 
 const apiRoutes = express.Router()
+app.use('/api', apiRoutes)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
-app.use('/api', apiRoutes)
 
 module.exports = {
   entry: './src/main.js',
@@ -98,6 +98,7 @@ module.exports = {
     //然后找到devServer,在里面添加
     before(app) {
       app.get('/api/seller', (req, res) => {
+        console.log(req.query)
         res.json({
           errno: 0,
           data: seller
@@ -121,8 +122,14 @@ module.exports = {
           data: foods
         });
       }),
+      app.get('/api/login',(req,res)=>{
+        res.json({
+          errno:0,
+          data:req.query
+        })
+      }),
       app.post('/api/getPrice', (req,res)=> { // 注意这里改为post就可以了
-        console.log(req.body)
+        console.log(req,req.body,req.params,req.query)
         res.json({
           errno: 0,
           data: 756
