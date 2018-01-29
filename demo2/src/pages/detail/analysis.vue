@@ -79,6 +79,11 @@
       </ul>
     </div>
 
+    <dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
+      <table>
+        
+      </table>
+    </dialog>
     <!-- <check-order :is-show-check-dialog="isShowCheckOrder" :order-id="orderId" @on-close-check-dialog="hideCheckOrder"></check-order> -->
   </div>
 </template>
@@ -88,6 +93,7 @@
   import VCounter from '../../components/counter'
   import VChooser from '../../components/chooser'
   import VMulChooser from '../../components/multiple-chooser'
+  import Dialog from '../../components/dialog.vue'
   export default {
     data() {
       return {
@@ -147,7 +153,8 @@
       VSelection,
       VCounter,
       VChooser,
-      VMulChooser
+      VMulChooser,
+      MyDialog:Dialog
     },
     methods: {
       onParamChange(attr,val){
