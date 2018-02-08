@@ -186,6 +186,7 @@
       }
     },
     mounted () {
+      console.log(this.$store)
       this.buyNum=this.minNum,
       this.buyType=this.productType[0],
       this.period=this.periodList[0],
