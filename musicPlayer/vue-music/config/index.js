@@ -4,14 +4,13 @@
 
 const path = require('path')
 
-// const os = require('os')
-// let IPv4
-// console.log(os.networkInterfaces())
-// for (let i = 0; i < os.networkInterfaces().本地连接.length; i++) {
-//   if (os.networkInterfaces().本地连接[i].family == 'IPv4') {
-//     IPv4 = os.networkInterfaces().本地连接[i].address
-//   }
-// }
+const os = require('os')
+let IPv4
+for (let i = 0; i < os.networkInterfaces().本地连接.length; i++) {
+  if (os.networkInterfaces().本地连接[i].family == 'IPv4') {
+    IPv4 = os.networkInterfaces().本地连接[i].address
+  }
+}
 
 module.exports = {
   dev: {
@@ -22,9 +21,9 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    // host: IPv4 || 'localhost', // can be overwritten by process.env.HOST
-    host: 'localhost',
-    port: 8081, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: IPv4 || 'localhost', // can be overwritten by process.env.HOST
+    // host: 'localhost',
+    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,

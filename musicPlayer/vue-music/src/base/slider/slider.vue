@@ -106,7 +106,6 @@ export default {
     },
     _initDots() {
       this.dots = new Array(this.children.length)
-      console.log(this.dots)
     },
     _play() {
       clearTimeout(this.timer)
