@@ -44,6 +44,13 @@ export default {
         this._play()
       }
     }, 20)
+    window.addEventListener('resize', () => {
+      if (!this.slider) {
+        return
+      }
+      this._setSliderWidth(true)
+      this.slider.refresh()
+    })
   },
   activated() {
     if (this.autoPlay) {
@@ -57,7 +64,7 @@ export default {
     clearTimeout(this.timer)
   },
   methods: {
-    _setSliderWidth() {
+    _setSliderWidth(isResize) {
       this.children = this.$refs.sliderGroup.children
       let width = 0
       let sliderWidth = this.$refs.slider.clientWidth
@@ -67,7 +74,7 @@ export default {
         child.style.width = sliderWidth + 'px'
         width += sliderWidth
       }
-      if (this.loop) { //  无缝循环滚动
+      if (this.loop && !isResize) { //  无缝循环滚动
         width += 2 * sliderWidth
       }
       this.$refs.sliderGroup.style.width = width + 'px'
@@ -77,7 +84,7 @@ export default {
         scrollX: true, // 允许横向滚动
         scrollY: false, // 禁止纵向滚动
         momentum: false,
-        click: true,
+        // click: true,
         snap: {
           loop: this.loop,
           threshold: 0.3,
@@ -85,12 +92,7 @@ export default {
         }
       })
       this.slider.on('scrollEnd', () => { //  滚动结束
-        let pageIndex = this.slider.getCurrentPage().pageX
-        if (this.loop) {
-          console.log(pageIndex)
-          pageIndex -= 1
-        }
-        this.currentPageIndex = pageIndex
+        this.currentPageIndex = this.slider.getCurrentPage().pageX
 
         if (this.autoPlay) {
           this._play()
@@ -104,15 +106,12 @@ export default {
     },
     _initDots() {
       this.dots = new Array(this.children.length)
+      console.log(this.dots)
     },
     _play() {
-      let pageIndex = this.currentPageIndex + 1
-      if (this.loop) {
-        console.log(pageIndex)
-        pageIndex += 1
-      }
+      clearTimeout(this.timer)
       this.timer = setTimeout(() => {
-        this.slider.goToPage(pageIndex, 0, 400)
+        this.slider.next()
       }, this.interval)
     }
   }
