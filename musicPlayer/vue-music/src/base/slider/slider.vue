@@ -52,12 +52,12 @@ export default {
       this.slider.refresh()
     })
   },
-  activated() {
+  activated() { //  keep-alive组件激活时调用
     if (this.autoPlay) {
       this._play()
     }
   },
-  deactivated() {
+  deactivated() { //  keep-alive停用时调用
     clearTimeout(this.timer)
   },
   beforeDestroy() {
@@ -84,10 +84,10 @@ export default {
         scrollX: true, // 允许横向滚动
         scrollY: false, // 禁止纵向滚动
         momentum: false,
-        // click: true,
+        click: true, // 不设为true，移动端点击slider不跳转
         snap: {
           loop: this.loop,
-          threshold: 0.3,
+          threshold: 0.1,
           speed: 1000
         }
       })
