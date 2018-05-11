@@ -1,6 +1,6 @@
 <template>
   <div class="recommend">
-    <scroll class="recommend-content" :data="discList">
+    <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
         <div class="slider-wrapper" v-if="recommends.length">
           <slider>
@@ -16,7 +16,7 @@
           <ul>
             <li v-for="(item,index) in discList" :key="index" class="item">
               <div class="icon">
-                <img width="60" height="60" :src="item.imgurl" alt="">
+                <img width="60" height="60" @load="loadImage" :src="item.imgurl" alt="">
               </div>
               <div class="text">
                 <h2 class="name" v-html="item.creator.name"></h2>
@@ -51,6 +51,12 @@ export default {
     this._getDiscList()
   },
   methods: {
+    loadImage() {
+      if (!this.checkloaded) {
+        this.$refs.scroll.refresh() // 实际上已经不需要这一步，better-scroll已修复相关bug(轮播图加载慢时,插件已经计算完高度，滚动时会有部分歌单在下方显示不出来)
+        this.checkloaded = true
+      }
+    },
     _getRecommend() {
       getRecommend().then((res) => {
         if (res.code === ERR_OK) {

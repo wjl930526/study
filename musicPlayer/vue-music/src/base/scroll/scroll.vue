@@ -33,7 +33,7 @@ export default {
         return
       }
       this.scroll = new BScroll(this.$refs.wrapper, {
-        probeType: this.probeType,// scroll事件触发时机 默认为0
+        probeType: this.probeType, // scroll事件触发时机 默认为0
         click: this.click
       })
     },
@@ -47,11 +47,11 @@ export default {
       this.scroll && this.scroll.refresh()
     }
   },
-  watch:{
-    data(){
-      setTimeout(()=>{
+  watch: {
+    data() {
+      setTimeout(() => {
         this.refresh()
-      },20)
+      }, 20)
     }
   }
 }
