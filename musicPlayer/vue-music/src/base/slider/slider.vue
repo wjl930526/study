@@ -1,5 +1,5 @@
 <template>
-  <div class="slider" ref="slider">
+  <div class="slider" ref="slider" v-show="sliderShow">
     <div class="slider-group" ref="sliderGroup">
       <slot></slot>
     </div>
@@ -17,7 +17,8 @@ export default {
   data() {
     return {
       dots: [],
-      currentPageIndex: 0
+      currentPageIndex: 0,
+      sliderShow: false
     }
   },
   props: {
@@ -39,6 +40,7 @@ export default {
       this._setSliderWidth()
       this._initDots()
       this._initSlider()
+      this.sliderShow = true
 
       if (this.autoPlay) {
         this._play()
@@ -105,6 +107,7 @@ export default {
       })
     },
     _initDots() {
+      console.log(this)
       this.dots = new Array(this.children.length)
     },
     _play() {
@@ -112,6 +115,13 @@ export default {
       this.timer = setTimeout(() => {
         this.slider.next()
       }, this.interval)
+    }
+  },
+  watch: {
+    sliderShow() {
+      setTimeout(() => {
+        this._setSliderWidth(true)
+      }, 20)
     }
   }
 }
