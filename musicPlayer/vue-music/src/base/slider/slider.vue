@@ -107,7 +107,6 @@ export default {
       })
     },
     _initDots() {
-      console.log(this)
       this.dots = new Array(this.children.length)
     },
     _play() {
