@@ -7,6 +7,8 @@
 import {getSingerList} from 'api/singer'
 import {ERR_OK} from 'api/config'
 
+const HOT_NAME = '热门'
+const HOT_SINGER_LEN = 10
 export default {
   data() {
     return {
@@ -22,6 +24,22 @@ export default {
         if (res.code === ERR_OK) {
           this.singers = res.data.list
           console.log(this.singers)
+        }
+      })
+    },
+    _normalizeSinger(list) {
+      let map = {
+        hot: {
+          title: HOT_NAME,
+          itmes: []
+        }
+      }
+      list.forEach((item, index) => {
+        if (index < HOT_SINGER_LEN) {
+          map.hot.items.push({
+            id: item.Fsinger_mid,
+            name: item.Fsinger_name
+          })
         }
       })
     }
