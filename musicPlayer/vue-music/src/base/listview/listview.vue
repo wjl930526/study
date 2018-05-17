@@ -1,7 +1,7 @@
 <template>
-  <scroll class="listview" :data="data">
+  <scroll class="listview" :data="data" ref="listview">
     <ul>
-      <li v-for="(group,index) in data" class="list-group" :key="index">
+      <li v-for="(group,index) in data" class="list-group" :key="index" ref="listGroup">
         <h2 class="list-group-title">{{group.title}}</h2>
         <ul>
           <li v-for="(item,index2) in group.items" class="list-group-item" :key="index2">
@@ -11,13 +11,26 @@
         </ul>
       </li>
     </ul>
+    <div class="list-shortcut" @touchstart="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove">
+      <ul>
+        <li v-for="(item,index) in shortcutList" class="item" :key="index" :data-index="index">{{item}}</li>
+      </ul>
+    </div>
   </scroll>
 </template>
 
 <script>
 import Scroll from 'base/scroll/scroll'
+import {getData} from 'common/js/dom'
+
+const ANCHOR_HEIGHT = 18
 
 export default {
+  created() {
+    // 为什么要在此处创建，不在data或者props中，
+    // 因为这些中会被添加getter和setter观测值的变化，以实现和dom的数据绑定，但是此处只需要在函数中使用这个值而已
+    this.touch = {}
+  },
   props: {
     data: {
       type: Array,
@@ -26,6 +39,33 @@ export default {
   },
   data() {
     return {}
+  },
+  computed: {
+    shortcutList() {
+      return this.data.map((group) => {
+        return group.title.substr(0, 1)
+      })
+    }
+  },
+  methods: {
+    onShortcutTouchStart(e) {
+      let anchorIndex = getData(e.target, 'index')
+      let firstTouch = e.touches[0]
+      console.log(e.touches)
+      this.touch.y1 = firstTouch.pageY
+      this.touch.anchorIndex = anchorIndex
+      this._scrollTo(anchorIndex)
+    },
+    onShortcutTouchMove(e) {
+      let firstTouch = e.touches[0]
+      this.touch.y2 = firstTouch.pageY
+      let delta = (this.touch.y2 - this.touch.y1) / ANCHOR_HEIGHT | 0 //  | 0 相当于Math.floor
+      let anchorIndex = this.touch.anchorIndex - 0 + delta
+      this._scrollTo(anchorIndex)
+    },
+    _scrollTo(index) {
+      this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
+    }
   },
   components: {
     Scroll
