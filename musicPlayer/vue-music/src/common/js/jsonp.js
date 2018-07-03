@@ -1,6 +1,6 @@
 import originJSONP from 'jsonp'
 
-export default function jsonp(url, data, option) { // option表示回调func名
+export default function jsonp(url, data, option) { // option表示一个对象，对象中的param字段表示回调func名，默认为callback
   url += (url.indexOf('?') < 0 ? '?' : '&') + param(data)
   return new Promise((resolve, reject) => {
     originJSONP(url, option, (err, data) => {
