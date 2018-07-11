@@ -9,8 +9,10 @@
 export default {
   name: 'loading',
   props: {
-    title: String,
-    default: '载入中...'
+    title: {
+      type: String,
+      default: '载入中...'
+    }
   }
 }
 </script>
