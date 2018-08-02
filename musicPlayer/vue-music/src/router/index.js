@@ -34,8 +34,8 @@ export default new Router({
       component: Search
     },
     {
-      path:'*',
-      redirect:'recommend'
+      path: '*',
+      redirect: 'recommend'
     }
   ]
 })
