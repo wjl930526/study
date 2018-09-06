@@ -3,6 +3,7 @@
     <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
         <div class="slider-wrapper" v-if="recommends.length">
+          <!--加v-if  是防止从getrcommend获取数据时，还没收到返回信息(异步),slider已经去执行mounted-->
           <slider>
             <div v-for="(item,index) in recommends" :key="index">
               <a :href="item.linkUrl">
