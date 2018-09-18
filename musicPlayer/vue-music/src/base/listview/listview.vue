@@ -71,6 +71,16 @@ export default {
       this._scrollTo(anchorIndex)
     },
     _scrollTo(index) {
+      console.log(index)
+      if (index === null) { //  点热门之上和z之下黑色区域时
+        return
+      }
+      if (index < 0) {
+        index = 0
+      } else if (index > this.listHeight.length - 2) {
+        index = this.listHeight.length - 2
+      }
+      this.scrollY = -this.listHeight[index]
       this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0) //  0表示立即滚动到，没有缓动效果
     },
     scroll(pos) {
@@ -95,6 +105,7 @@ export default {
       }, 20)
     },
     scrollY(newY) {
+      console.log(newY)
       const listHeight = this.listHeight
       //  当滚动到顶部，newY>0
       if (newY > 0) {
@@ -105,7 +116,7 @@ export default {
       for (let i = 0; i < listHeight.length - 1; i++) {
         let height1 = listHeight[i]
         let height2 = listHeight[i + 1]
-        if (-newY > height1 && -newY < height2) {
+        if (-newY >= height1 && -newY < height2) {
           this.currentIndex = i
           console.log(this.currentIndex)
           return

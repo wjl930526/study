@@ -43,7 +43,6 @@ export default {
       if (this.listenScroll) {
         let me = this
         this.scroll.on('scroll', (pos) => {
-          debugger
           me.$emit('scroll', pos)
         })
       }
