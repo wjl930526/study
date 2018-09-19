@@ -16,6 +16,9 @@
         <li v-for="(item,index) in shortcutList" class="item" :class="{'current':currentIndex===index}" :key="index" :data-index="index">{{item}}</li>
       </ul>
     </div>
+    <div class="list-fixed" v-show="fixedTitle">
+      <h1 class="fixed-title">{{fixedTitle}}</h1>
+    </div>
   </scroll>
 </template>
 
@@ -52,6 +55,12 @@ export default {
       return this.data.map((group) => {
         return group.title.substr(0, 1)
       })
+    },
+    fixedTitle() {
+      if (this.scrollY > 0) { //  到顶部后继续下拉隐藏区块
+        return ''
+      }
+      return this.data[this.currentIndex] ? this.data[this.currentIndex].title : ''
     }
   },
   methods: {
@@ -71,11 +80,10 @@ export default {
       this._scrollTo(anchorIndex)
     },
     _scrollTo(index) {
-      console.log(index)
       if (index === null) { //  点热门之上和z之下黑色区域时
         return
       }
-      if (index < 0) {
+      if (index < 0) { //  拖动到之上和之下区域时
         index = 0
       } else if (index > this.listHeight.length - 2) {
         index = this.listHeight.length - 2
@@ -105,7 +113,6 @@ export default {
       }, 20)
     },
     scrollY(newY) {
-      console.log(newY)
       const listHeight = this.listHeight
       //  当滚动到顶部，newY>0
       if (newY > 0) {
@@ -118,7 +125,6 @@ export default {
         let height2 = listHeight[i + 1]
         if (-newY >= height1 && -newY < height2) {
           this.currentIndex = i
-          console.log(this.currentIndex)
           return
         }
         this.currentIndex = 0
