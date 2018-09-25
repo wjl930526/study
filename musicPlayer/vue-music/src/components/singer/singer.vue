@@ -9,6 +9,7 @@ import {getSingerList} from 'api/singer'
 import {ERR_OK} from 'api/config'
 import Singer from 'common/js/singer'
 import ListView from 'base/listview/listview'
+import {mapMutations} from 'vuex' //  vuex语法糖，对mutation做了一次封装  使用时通过扩展运算符(...)方式调mapMutations,然后做一个对象的映射，把mutation的修改映射成一个方法
 
 const HOT_NAME = '热门'
 const HOT_SINGER_LEN = 10
@@ -29,6 +30,7 @@ export default {
       this.$router.push({
         path: `/singer/${singer.id}`
       })
+      this.setSinger(singer) // 相当于this.$store.commit('SET_SINGER')
     },
     _getSingerList() {
       getSingerList().then(res => {
@@ -78,7 +80,10 @@ export default {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0) // 升序排列
       })
       return hot.concat(ret)
-    }
+    },
+    ...mapMutations({
+      setSinger: 'SET_SINGER'
+    })
   }
 }
 </script>

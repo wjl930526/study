@@ -1,2 +1,2 @@
-// 希望从getter中取数据到组件中
+// 希望从getter中取state中数据到组件中
 export const singer = state => state.singer
