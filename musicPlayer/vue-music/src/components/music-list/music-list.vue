@@ -18,6 +18,9 @@
       <div class="song-list-wrapper">
         <song-list :songs="songs"></song-list>
       </div>
+      <div class="loading-container" v-show="!songs.length">
+        <loading></loading>
+      </div>
     </scroll>
   </div>
 </template>
@@ -26,6 +29,7 @@
 import Scroll from 'base/scroll/scroll'
 import SongList from 'base/song-list/song-list'
 import {prefixStyle} from 'common/js/dom'
+import Loading from 'base/loading/loading'
 
 const RESERVED_HEIGHT = 40
 const transform = prefixStyle('transform')
@@ -82,13 +86,13 @@ export default {
       let scale = 1
       let blur = 0
       const percent = Math.abs(newY / this.imageHeight)
-      this.$refs.layer.style[transform] = `translate3d(0,${translateY}px,0)`
       if (newY > 0) { //  下拉
         scale = 1 + percent
         zIndex = 10
       } else { // 上推k
         blur = Math.min(20 * percent, 20)
       }
+      this.$refs.layer.style[transform] = `translate3d(0,${translateY}px,0)`
       this.$refs.filter.style[backdrop] = `blur(${blur}px)`
       if (newY < this.minTransalteY) {
         zIndex = 10
@@ -96,7 +100,8 @@ export default {
         this.$refs.bgImage.style.height = `${RESERVED_HEIGHT}px`
         this.$refs.playBtn.style.display = 'none'
       } else {
-        this.$refs.bgImage.style.paddingTop = '70k%'
+        zIndex = 0
+        this.$refs.bgImage.style.paddingTop = '70%'
         this.$refs.bgImage.style.height = 0
         this.$refs.playBtn.style.display = ''
       }
@@ -106,7 +111,8 @@ export default {
   },
   components: {
     Scroll,
-    SongList
+    SongList,
+    Loading
   }
 }
 </script>
