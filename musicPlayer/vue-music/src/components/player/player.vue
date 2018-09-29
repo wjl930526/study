@@ -18,7 +18,7 @@
         </div>
         <div class="middle">
           <div class="middle-l">
-            <div class="cd-wrapper">
+            <div class="cd-wrapper" ref="cdWrapper">
               <div class="cd">
                 <img class="image" :src="currentSong.image">
               </div>
@@ -67,6 +67,9 @@
 <script>
 import {mapGetters, mapMutations} from 'vuex'
 import animations from 'create-keyframe-animation'
+import {prefixStyle} from 'common/js/dom'
+
+const transform = prefixStyle('transform')
 
 export default {
   name: 'player',
@@ -79,21 +82,56 @@ export default {
   },
   methods: {
     enter(el, done) {
-
+      const {x, y, scale} = this._getPosAndScale()
+      let animation = {
+        0: {
+          transform: `translate3d(${x}px,${y}px,0) scale(${scale})`
+        },
+        60: {
+          transform: `translate3d(0,0,0) scale(1.1)`
+        },
+        100: {
+          transform: `translate3d(0,0,0) scale(1)`
+        }
+      }
+      animations.registerAnimation({
+        name: 'move',
+        animation,
+        presets: {
+          duration: 400,
+          easing: 'linear'
+        }
+      })
+      animations.runAnimation(this.$refs.cdWrapper, 'move', done)
     },
     afterEnter() {
-
+      animations.unregisterAnimation('move')
+      this.$refs.cdWrapper.style.animation = ''
     },
     leave(el, done) {
-
+      this.$refs.cdWrapper.style.transition = 'all 0.4s'
+      const {x, y, scale} = this._getPosAndScale()
+      this.$refs.cdWrapper.style[transform] = `translate3d(${x}px,${y}px,0) scale(${scale})`
+      this.$refs.cdWrapper.addEventListener('transitionend', done)
     },
     afterLeave() {
-
+      this.$refs.cdWrapper.style.transition = ''
+      this.$refs.cdWrapper.style.transform = ''
     },
     _getPosAndScale() {
+      // mini中图片的位置
       const targetWidth = 40
       const paddingLeft = 40
       const paddingBottom = 30
+      // normal中图片的位置及缩放的scale
+      const paddingTop = 80
+      const width = window.innerWidth * 0.8
+      const scale = targetWidth / width
+      const x = -(window.innerWidth / 2 - paddingLeft) // 圆心x轴差
+      const y = window.innerHeight - paddingTop - width / 2 - paddingBottom // 圆心y轴差
+      return {
+        x, y, scale
+      }
     },
     back() {
       this.setFullScreen(false)
