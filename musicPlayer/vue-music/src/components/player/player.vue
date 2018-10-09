@@ -84,7 +84,7 @@ export default {
       return this.playing ? 'icon-pause-mini' : 'icon-play-mini'
     },
     cdCls() {
-      return this.playing ? 'play' : 'play-pause'
+      return this.playing ? 'play' : 'play pause'
     },
     ...mapGetters([
       'fullScreen',
@@ -143,7 +143,9 @@ export default {
       const x = -(window.innerWidth / 2 - paddingLeft) // 圆心x轴差
       const y = window.innerHeight - paddingTop - width / 2 - paddingBottom // 圆心y轴差
       return {
-        x, y, scale
+        x,
+        y,
+        scale
       }
     },
     back() {
