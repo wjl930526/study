@@ -10,7 +10,11 @@
 </template>
 
 <script>
+import {prefixStyle} from 'common/js/dom'
+
 const progressBarWidth = 16
+const transform = prefixStyle('transform')
+
 export default {
   name: 'progress-bar',
   props: {
@@ -25,6 +29,7 @@ export default {
         const barWidth = this.$refs.progressBar.clientWidth - progressBarWidth
         const offsetWidth = newPercent * barWidth
         this.$refs.progress.style.width = `${offsetWidth}px`
+        this.$refs.progressBtn.style[transform] = `translate3d(${offsetWidth}px,0,0)`
       }
     }
   }
