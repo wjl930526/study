@@ -2,7 +2,10 @@
   <div class="progress-bar" ref="progressBar">
     <div class="bar-inner">
       <div class="progress" ref="progress"></div>
-      <div class="progress-btn-wrapper" ref="progressBtn">
+      <div class="progress-btn-wrapper" ref="progressBtn"
+           @touchstart.prevent="progressTouchStart"
+           @touchmove="progressTouchMove"
+           @touchend="progressTouchEnd">
         <div class="progress-btn"></div>
       </div>
     </div>
@@ -23,6 +26,9 @@ export default {
       default: 0
     }
   },
+  created() {
+    this.touch = {}
+  },
   watch: {
     percent(newPercent) {
       if (newPercent >= 0) {
@@ -31,6 +37,23 @@ export default {
         this.$refs.progress.style.width = `${offsetWidth}px`
         this.$refs.progressBtn.style[transform] = `translate3d(${offsetWidth}px,0,0)`
       }
+    }
+  },
+  methods: {
+    progressTouchStart(e) {
+      this.touch.initiated = true
+      this.touch.startX = e.touchs[0].pageX
+      this.touch.left = this.$refs.progress.clientWidth
+    },
+    progressTouchMove(e) {
+      if (!this.touch.initiated) {
+        return
+      }
+      const deltax = e.touches[0].pageX = this.touch.startX
+      const offsetWidth = Math.max(0, this.touch.left + deltax)
+    },
+    progressTouchEnd(e) {
+
     }
   }
 }
