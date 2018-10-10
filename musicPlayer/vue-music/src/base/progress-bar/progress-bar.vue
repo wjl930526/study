@@ -15,7 +15,7 @@
 <script>
 import {prefixStyle} from 'common/js/dom'
 
-const progressBarWidth = 16
+const progressBtnWidth = 16
 const transform = prefixStyle('transform')
 
 export default {
@@ -32,28 +32,32 @@ export default {
   watch: {
     percent(newPercent) {
       if (newPercent >= 0) {
-        const barWidth = this.$refs.progressBar.clientWidth - progressBarWidth
+        const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
         const offsetWidth = newPercent * barWidth
-        this.$refs.progress.style.width = `${offsetWidth}px`
-        this.$refs.progressBtn.style[transform] = `translate3d(${offsetWidth}px,0,0)`
+        this._offsetWidth(offsetWidth)
       }
     }
   },
   methods: {
     progressTouchStart(e) {
       this.touch.initiated = true
-      this.touch.startX = e.touchs[0].pageX
+      this.touch.startX = e.touches[0].pageX
       this.touch.left = this.$refs.progress.clientWidth
     },
     progressTouchMove(e) {
       if (!this.touch.initiated) {
         return
       }
-      const deltax = e.touches[0].pageX = this.touch.startX
-      const offsetWidth = Math.max(0, this.touch.left + deltax)
+      const deltax = e.touches[0].pageX - this.touch.startX
+      const offsetWidth = Math.min(this.$refs.progressBar.clientWidth - progressBtnWidth, Math.max(0, this.touch.left + deltax))
+      this._offsetWidth(offsetWidth)
     },
     progressTouchEnd(e) {
 
+    },
+    _offsetWidth(offsetWidth) {
+      this.$refs.progress.style.width = `${offsetWidth}px`
+      this.$refs.progressBtn.style[transform] = `translate3d(${offsetWidth}px,0,0)`
     }
   }
 }

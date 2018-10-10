@@ -228,7 +228,6 @@ export default {
     format(interval) {
       interval = interval | 0 // 向下取整相当于Math.floor
       const minute = interval / 60 | 0
-      debugger
       const second = String(interval % 60).length < 2 ? `0${interval % 60}` : interval % 60
       return `${minute}:${second}`
     }
