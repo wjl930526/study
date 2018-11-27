@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    // foo() // a
+    // function foo (params) {
+    //     console.log('a')
+    // }
+    // 函数声明会被提升(如上)，函数表达式不会提升(如下)。变量声明和函数声明都会被提升，但函数优先
+    // foo() // typeerror
+    // bar() // refrenceerror
+    // var foo = function bar (params) {
+    //     console.log('a')
+    // }
+    // bar() // refrenceerror
+    // -----------------------------
+
+
+    // foo() //typeerror
+    // var a = true
+    // if (a) {
+    //     function foo (params) {
+    //         console.log('a')
+    //     }
+    // } else {
+    //     function foo (params) {
+    //         console.log('b')
+    //     }
+    // }
+    // ---------------------------
+
+
+    // var a = true
+    // if (a) {
+    //     function foo (params) {
+    //         console.log('a')
+    //     }
+    // } else {
+    //     function foo (params) {
+    //         console.log('b')
+    //     }
+    // }
+    // foo() // a
+    // --------------------------
+
+
+    // let a=1
+    // if(a){
+    //     let a=3
+    //     console.log(a) // 3
+    // }
+    // console.log(a) // 1
+    // =--------------------------
+
+
+    // let a=1
+    // if(a){
+    //     var b=3
+    // }
+    // console.log(b) // 3
+</script>
