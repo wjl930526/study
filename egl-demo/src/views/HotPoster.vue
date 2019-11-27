@@ -1,6 +1,6 @@
 <template>
-  <div class="mine">
-    <van-button type="primary">我的</van-button>
+  <div class="hostPoster">
+    <van-button type="primary">热点海报</van-button>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ import { Button } from 'vant';
     [Button.name]: Button
   }
 })
-export default class Mine extends Vue {
+export default class HostPoster extends Vue {
 }
 </script>
 
