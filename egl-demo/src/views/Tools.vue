@@ -1,6 +1,6 @@
 <template>
   <div class="tools">
-    <tool-item></tool-item>
+    <tool-item :itemData="toolItems[0]"></tool-item>
     <!-- <tool-item></tool-item>
     <tool-item></tool-item> -->
   </div>
@@ -14,10 +14,18 @@ import ToolItem from '@/components/ToolItem.vue';
 @Component({
   components: {
     [Button.name]: Button,
-    ToolItem,
-  },
+    ToolItem
+  }
 })
 export default class Tools extends Vue {
+  private toolItems = [
+    {
+      title: '热点海报',
+      desc: '一键分享属于你的个性创意海报',
+      img: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      to: '/HotPoster'
+    }
+  ];
 }
 </script>
 
@@ -26,7 +34,7 @@ export default class Tools extends Vue {
 .tools{
   height: 100%;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 30px;
   background-color: #f5f5f5;
 }
 </style>

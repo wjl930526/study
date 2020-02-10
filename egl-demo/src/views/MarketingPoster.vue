@@ -1,6 +1,6 @@
 <template>
-  <div class="appMain">
-    <router-view></router-view>
+  <div class="marketingPoster">
+    <van-button type="primary">营销海报</van-button>
   </div>
 </template>
 
@@ -10,17 +10,13 @@ import { Button } from 'vant';
 
 @Component({
   components: {
-    [Button.name]: Button,
-  },
+    [Button.name]: Button
+  }
 })
-export default class AppMain extends Vue {
+export default class MarketingPoster extends Vue {
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-  .appMain{
-    height: calc(100vh - 50px);
-    overflow: scroll;
-  }
+<style scoped lang="scss">
 </style>

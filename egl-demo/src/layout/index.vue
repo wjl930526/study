@@ -1,48 +1,46 @@
 <template>
-  <div class="layout">
+  <div class="app-wrapper">
     <app-main></app-main>
-    <van-tabbar route>
+    <van-tabbar route safe-area-inset-bottom>
       <van-tabbar-item
         replace
         to="/newsList"
-        icon="home-o"
+        icon="newspaper-o"
       >
         阅读
       </van-tabbar-item>
       <van-tabbar-item
         replace
         to="/tools"
-        icon="search"
+        icon="share"
       >
         工具
       </van-tabbar-item>
       <van-tabbar-item
         replace
         to="/mine"
-        icon="search"
+        icon="user-circle-o"
       >
         我的
       </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
-
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Tabbar, TabbarItem } from 'vant';
-import AppMain from '@/layout/AppMain.vue';
+import { Component, Vue } from 'vue-property-decorator';
+import { Button, Tabbar, TabbarItem } from 'vant';
+import AppMain from '@/layout/components/AppMain.vue';
 
 @Component({
   components: {
+    [Button.name]: Button,
     [Tabbar.name]: Tabbar,
     [TabbarItem.name]: TabbarItem,
-    AppMain,
-  },
+    AppMain
+  }
 })
-export default class Layout extends Vue {
-}
+export default class Layout extends Vue {}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 </style>

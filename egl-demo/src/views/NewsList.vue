@@ -10,8 +10,8 @@ import { Button } from 'vant';
 
 @Component({
   components: {
-    [Button.name]: Button,
-  },
+    [Button.name]: Button
+  }
 })
 export default class NewsLIst extends Vue {
 }
