@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://source.vipabc.com/ext/js/lib/jquery-1.11.1.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div onclick="test()">是兄弟就来点我</div>
+  <a href="http://www.baidu.com" onclick="alert(123)">www.baidu.com</a>
+  <p>ppppppp</p>
+</body>
+</html>
+<script>
+  $(function() {
+    console.log("ready1执行");
+    $('p').click(function(){
+      alert(1)
+    })
+  });
+  function test (){
+    alert('uuu')
+  }
+  document.getElementsByTagName('div')[0].onclick=function(){
+    alert('hhh')
+  }
+  window.onload=function(){
+    console.log('456')
+    $('p').unbind('click').click(function(){
+      alert(2)
+    })
+  }
+</script>

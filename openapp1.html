@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <a id="openapp" href="javascript:;">点击下载</a>
+</body>
+
+</html>
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?fd3ebc39e3d20d958cc417964a1a070f";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+
+  var url = {
+    open: 'tutorabc://main',
+    down: 'https://a.app.qq.com/o/simple.jsp?pkgname=com.vipabc.vipmobile.phone'
+  }
+  var iframe = document.createElement('iframe')
+  var body = document.body
+  iframe.style.cssText = 'display:none;width=0;height=0'
+  var timer = null
+
+  // 立即打开的按钮
+  var openapp = document.getElementById('openapp')
+  if (!!(navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/))) {
+    alert('ios')
+    openapp.addEventListener('click', function () {
+      window.location.href = url.open;
+      setTimeout(function () {
+        window.location.href = url.down;
+        window.location.href = url.down;
+      }, 2000);
+    }, false)
+  } else {
+    alert('android')
+    openapp.addEventListener(
+      'click',
+      function () {
+        window.location.href = url.open
+        var _clickTime = +new Date()
+
+        function check(elsTime) {
+          if (elsTime > 3000 || document.hidden || document.webkitHidden) {} else {
+            window.location.href = url.down
+          }
+        }
+        //启动间隔20ms运行的定时器，并检测累计消耗时间是否超过3000ms，超过则结束
+        var _count = 0,
+          intHandle
+        intHandle = setInterval(function () {
+          _count++
+          var elsTime = +new Date() - _clickTime
+          if (_count >= 100 || elsTime > 3000) {
+            clearInterval(intHandle)
+            check(elsTime)
+          }
+        }, 20)
+      },
+      false
+    )
+  }
+</script>

@@ -41,7 +41,8 @@ p.constructor === Point.prototype.constructor
 所有对象都会从它的原型上继承一个 constructor 属性：
 
 ``` constructor
-p.constructor === Point; // 实例对象的构造方法指向构造函数
+p.constructor === Point; // true // 实例对象的构造方法指向构造函数
+p.constructor === Point.prototype.constructor; // true
 
 var o = {};
 o.constructor === Object; // true
