@@ -56,3 +56,19 @@ x[4] = true; // Error
 ### 11. Object
 
 <font color=#bf414a size=4 face="黑体">object</font>表示非原始类型，也就是除number，string，boolean，symbol，null或undefined之外的类型。
+
+## 泛型
+
+
+<font color=#bf414a size=4 face="黑体">泛型很复杂，需要经常翻看！！！ https://www.tslang.cn/docs/handbook/generics.html</font>
+```
+function identity<T>(arg: T): T {
+    return arg;
+}
+```
+我们给identity添加了类型变量T。 T帮助我们捕获用户传入的类型（比如：number），之后我们就可以使用这个类型。 之后我们再次使用了 T当做返回值类型。现在我们可以知道参数类型与返回值类型是相同的了。 这允许我们跟踪函数里使用的类型的信息。
+
+我们把这个版本的identity函数叫做泛型，因为它可以适用于多个类型。 不同于使用 any，它不会丢失信息，像第一个例子那像保持准确性，传入数值类型并返回数值类型。
+
+
+
