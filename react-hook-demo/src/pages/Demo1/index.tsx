@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 
+let a: Array<string | number> = [1,2,3,4,"1"]
+let b:[string,number] = ["1",12]
+let c = Directions.Down
+
+console.log(c)
+// let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
+// console.log(directions)
+
 function Child1(props: any) {
   console.log(props);
   const { num, handleClick } = props;
@@ -46,7 +54,6 @@ const Parent: React.FC = () => {
 
   return (
     <div>
-      <p>123</p>
       <Child1 num={num} handleClick={setNum} />
       <Child2 text={text} handleClick={setText} />
     </div>
